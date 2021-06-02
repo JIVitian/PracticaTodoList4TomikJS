@@ -36,7 +36,7 @@ export default class Model
 
     getTodos()
     {
-        return this.todos;
+        return this.todos.map((todo) => ({...todo}));
     }
 
     findTodo(id)
@@ -65,6 +65,13 @@ export default class Model
         this.save();
 
         return { ...todo };
+    }
+
+    editTodo(id, values)
+    {
+        const index = this.findTodo(id);
+        Object.assign(this.todos[index], values);
+        this.save();
     }
 
     removeTodo(id)
